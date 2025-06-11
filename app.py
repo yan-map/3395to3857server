@@ -66,7 +66,7 @@ def reproject_tile(tile_data, z, x, y, src_crs="EPSG:3395", dst_crs="EPSG:3857")
                 data = src.read()
                 if data.shape[0] == 4:  # Если есть альфа-канал, убираем его
                     data = data[:3]
-
+                
                 # Вычисляем границы тайла
                 left, bottom, right, top = get_tile_bounds(z, x, y)
                 transform = from_bounds(left, bottom, right, top, src.width, src.height)
@@ -146,7 +146,7 @@ def cache_tile(z, x, y, data):
     except Exception as e:
         logging.error(f"Cache error: {e}")
 
-def get_cached_tile(z, x, y):
+defのですdef get_cached_tile(z, x, y):
     try:
         if USE_REDIS:
             return redis_client.get(f"tile:{z}:{x}:{y}")
@@ -163,7 +163,7 @@ def get_cached_tile(z, x, y):
 @app.get("/tiles/{z}/{x}/{y}.png")
 async def get_tile(z: int, x: int, y: int):
     # Проверка кэша
-  cached_tile = get_cached_tile(z, x, y)
+    cached_tile = get_cached_tile(z, x, y)
     if cached_tile:
         return Response(content=cached_tile, media_type="image/png")
 
